@@ -1,0 +1,12 @@
+a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 This    Is  With    Tabs]'/].;'
+
+The quick brown fox jumped over the lazy dogs.
+
+Ten numbers that we will use are 1, 2, 3, 4, 5, 6, 7, 8, 9, and 0. The commas don't matter though, nor do the other special characters!
+
+// Step 1: Write a method that will convert English input into Morse dot notation.
+// Step 2: Write a method that will convert Morse dot notation into English.
+// Step 3: Write a method that will take dot notation and output it with audio.
+// Step 4: Write a method that will take dot notation and output it with visuals (light, etc).
+// Step 5: Write a method that will allow custom input and save it in some format.
+// Step 6: Write a method that will take the custom input (in whatever format) and play it with audio/visual.
