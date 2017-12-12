@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace MCDoodle.API
@@ -43,7 +42,7 @@ namespace MCDoodle.API
             Regex rgx_duplicateSpaces = new Regex(@"[ ]{1,}");
 
             lineInMorse = rgx_duplicateSpaces.Replace(lineInMorse," ");
-            // Replace each letter with its Morse e quivalent
+            // Replace each letter with its Morse equivalent
             lineInMorse = lineInMorse.Replace(" ","| ");
             lineInMorse = lineInMorse.Replace("?"," ||");
             lineInMorse = lineInMorse.Replace("!"," ||");
@@ -84,8 +83,6 @@ namespace MCDoodle.API
             lineInMorse = lineInMorse.Replace("7","--... ");
             lineInMorse = lineInMorse.Replace("8","---.. ");
             lineInMorse = lineInMorse.Replace("9","----. ");
-
-            // return lineInMorse;
         }
     }
 }
