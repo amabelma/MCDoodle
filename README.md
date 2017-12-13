@@ -19,7 +19,7 @@ You don't have to contribute or anything since this isn't the language we'll ult
 
 ### Anticipated Steps ###
 // Step 1: Write a method that will convert English input into Morse dot notation. (done)
-// Step 2: Write a method that will convert Morse dot notation into English. (optional)
+// Step 2: Write a method that will convert Morse dot notation into English. (done)
 // Step 3: Write a method that will take dot notation and output it with audio. (raspberry pi)
 // Step 4: Write a method that will take dot notation and output it with visuals (light, etc). (raspberry pi)
 // Step 5: Write a method that will allow custom input and save it in some format. (can be with a touch screen or an actual morse key, or even the space bar... idc)

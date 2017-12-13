@@ -8,3 +8,13 @@
 /Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/obj/Debug/netcoreapp2.0/MCDoodle.API.AssemblyInfo.cs
 /Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/obj/Debug/netcoreapp2.0/MCDoodle.API.dll
 /Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/obj/Debug/netcoreapp2.0/MCDoodle.API.pdb
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\bin\Debug\netcoreapp2.0\MCDoodle.API.deps.json
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\bin\Debug\netcoreapp2.0\MCDoodle.API.runtimeconfig.json
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\bin\Debug\netcoreapp2.0\MCDoodle.API.runtimeconfig.dev.json
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\bin\Debug\netcoreapp2.0\MCDoodle.API.dll
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\bin\Debug\netcoreapp2.0\MCDoodle.API.pdb
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\obj\Debug\netcoreapp2.0\MCDoodle.API.csproj.CoreCompileInputs.cache
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\obj\Debug\netcoreapp2.0\MCDoodle.API.AssemblyInfoInputs.cache
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\obj\Debug\netcoreapp2.0\MCDoodle.API.AssemblyInfo.cs
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\obj\Debug\netcoreapp2.0\MCDoodle.API.dll
+C:\Users\mark.amabeli\Desktop\MCDoodle\MCDoodle.API\obj\Debug\netcoreapp2.0\MCDoodle.API.pdb

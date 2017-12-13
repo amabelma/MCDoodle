@@ -664,28 +664,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/markamabeli/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\mark.amabeli\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/MCDoodle.API.csproj",
+      "projectUniqueName": "C:\\Users\\mark.amabeli\\Desktop\\MCDoodle\\MCDoodle.API\\MCDoodle.API.csproj",
       "projectName": "MCDoodle.API",
-      "projectPath": "/Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/MCDoodle.API.csproj",
-      "packagesPath": "/Users/markamabeli/.nuget/packages/",
-      "outputPath": "/Users/markamabeli/Desktop/MorseCodeDoodle/MCDoodle.API/obj/",
+      "projectPath": "C:\\Users\\mark.amabeli\\Desktop\\MCDoodle\\MCDoodle.API\\MCDoodle.API.csproj",
+      "packagesPath": "C:\\Users\\mark.amabeli\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mark.amabeli\\Desktop\\MCDoodle\\MCDoodle.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/markamabeli/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\mark.amabeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -704,7 +706,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0.0",
             "autoReferenced": true
           }
         },

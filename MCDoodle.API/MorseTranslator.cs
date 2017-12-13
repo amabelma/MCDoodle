@@ -6,58 +6,40 @@ namespace MCDoodle.API
     public static class MorseTranslator
     {
         /// <summary>
-        /// Will accept a list of English words and return all words consolidated into a large single line. A space is shown as | and  punctuation is shown as ||.
+        /// Will accept a string in English and return a string of the Morse translation. A space is shown as | and  punctuation is shown as ||.
         /// </summary>
-        /// <param name="input">The list that will be translated into Morse code. The list itself will not be modified by the function.</param>
-        /// <returns>All words translated into Morse in a single string. Spaces and punctuation are marked.</returns>
-        public static string TranslateEnglishToMorse(List<string> input)
+        /// <param name="input">The string that will be translated into Morse code. The string itself will not be modified by the function.</param>
+        /// <returns>A string of the input translated into Morse. Spaces and punctuation are marked.</returns>
+        public static string TranslateEnglishToMorse(string input)
         {
-            for(int i=0; i<input.Count; i++)
-            {
-                input[i] = input[i].ToLower().Trim();
+            string result = input;
 
-                // remove all non-alphanumeric characters (except punctuation/morse characters)
-                Regex rgx_nonAlphaNumeric = new Regex(@"[^a-z0-9\.\?\!\-\|]");
-                input[i] = rgx_nonAlphaNumeric.Replace(input[i], "");
+            result = result.ToLower().Trim();
 
-                // replace all duplicate spaces with a single space
-                Regex rgx_duplicateSpaces = new Regex(@"[ ]{1,}");
-                input[i] = rgx_duplicateSpaces.Replace(input[i]," ");
-                
-                if(input[i] == "")
-                {
-                    input.RemoveAt(i);
-                    i--;
-                }
-            }
+            // remove all non-alphanumeric characters (except punctuation/morse characters)
+            Regex rgx_nonAlphaNumeric = new Regex(@"[^a-z0-9\.\?\!\s]");
+            result = rgx_nonAlphaNumeric.Replace(result, "");
 
-            string result = string.Empty;
-            for(int i=0; i<input.Count; i++)
-            {
-                string line = input[i];
-                ConvertAlphanumericToDotnotation(ref line);
-                result += line;
-            }
+            // replace all duplicate spaces with a single space
+            Regex rgx_duplicateSpaces = new Regex(@"[ ]{1,}");
+            result = rgx_duplicateSpaces.Replace(result," ");
+
+            ConvertAlphanumericToDotnotation(ref result);
 
             return result;
         }
 
         /// <summary>
-        /// Will accept a list of Morse words and return all words consolidated into a large single line in English. There are double spaces around punctuation, punctuation is all shown as a period, and there is no capitolization.
+        /// Will accept a string in Morse (with proper formatting!) and return a string of the English translation. There will be no capitalization and all punctuation will be shown as a period.
         /// </summary>
-        /// <param name="input">The list that will be translated into English. The list itself will not be modified by the function.</param>
-        /// <returns>All words translated into English in a single string. All punctuation is shown as periods.</returns>
-        public static string TranslateMorseToEnglish(List<string> input)
+        /// <param name="input">The string that will be translated into English. The string itself will not be modified by the function.</param>
+        /// <returns>A string of the input translated into English.</returns>
+        public static string TranslateMorseToEnglish(string input)
         {
-            string result = string.Empty;
+            string result = input;
             Regex rgx_extraSpace = new Regex(@"(?<=(\w))[\s]");
-            for(int i=0; i<input.Count; i++)
-            {
-                string line = input[i];
-                ConvertDotnotationToAlphanumeric(ref line);
-                line = rgx_extraSpace.Replace(line, "");
-                result += line;
-            }
+            ConvertDotnotationToAlphanumeric(ref result);
+            result = rgx_extraSpace.Replace(result, "");
 
             return result;
         }
@@ -65,97 +47,97 @@ namespace MCDoodle.API
         /// <summary>
         /// Will take each character in the input string and replace it with its Morse code equivalent. Spaces will be a pipe character, and punctuation will be a double pipe.
         /// </summary>
-        /// <param name="lineInMorse">The string that will be replaced. The string will be overwritten in place with the new characters.</param>
-        private static void ConvertAlphanumericToDotnotation(ref string lineInMorse)
+        /// <param name="stringToConvert">The string that will be replaced. The string will be overwritten in place with the new characters.</param>
+        private static void ConvertAlphanumericToDotnotation(ref string stringToConvert)
         {
             // Replace each letter with its Morse equivalent
-            lineInMorse = lineInMorse.Replace(" ","| "    );
-            lineInMorse = lineInMorse.Replace("?"," ||"   );
-            lineInMorse = lineInMorse.Replace("!"," ||"   );
-            lineInMorse = lineInMorse.Replace(".","  ||"  );
-            lineInMorse = lineInMorse.Replace("a",".- "   );
-            lineInMorse = lineInMorse.Replace("b","-... " );
-            lineInMorse = lineInMorse.Replace("c","-.-. " );
-            lineInMorse = lineInMorse.Replace("d","-.. "  );
-            lineInMorse = lineInMorse.Replace("e",". "    );
-            lineInMorse = lineInMorse.Replace("f","..-. " );
-            lineInMorse = lineInMorse.Replace("g","--. "  );
-            lineInMorse = lineInMorse.Replace("h",".... " );
-            lineInMorse = lineInMorse.Replace("i",".. "   );
-            lineInMorse = lineInMorse.Replace("j",".--- " );
-            lineInMorse = lineInMorse.Replace("k","-.- "  );
-            lineInMorse = lineInMorse.Replace("l",".-.. " );
-            lineInMorse = lineInMorse.Replace("m","-- "   );
-            lineInMorse = lineInMorse.Replace("n","-. "   );
-            lineInMorse = lineInMorse.Replace("o","--- "  );
-            lineInMorse = lineInMorse.Replace("p",".--. " );
-            lineInMorse = lineInMorse.Replace("q","--.- " );
-            lineInMorse = lineInMorse.Replace("r",".-. "  );
-            lineInMorse = lineInMorse.Replace("s","... "  );
-            lineInMorse = lineInMorse.Replace("t","- "    );
-            lineInMorse = lineInMorse.Replace("u","..- "  );
-            lineInMorse = lineInMorse.Replace("v","...- " );
-            lineInMorse = lineInMorse.Replace("w",".-- "  );
-            lineInMorse = lineInMorse.Replace("x","-..- " );
-            lineInMorse = lineInMorse.Replace("y","-.-- " );
-            lineInMorse = lineInMorse.Replace("z","--.. " );
-            lineInMorse = lineInMorse.Replace("0","----- ");
-            lineInMorse = lineInMorse.Replace("1",".---- ");
-            lineInMorse = lineInMorse.Replace("2","..--- ");
-            lineInMorse = lineInMorse.Replace("3","...-- ");
-            lineInMorse = lineInMorse.Replace("4","....- ");
-            lineInMorse = lineInMorse.Replace("5","..... ");
-            lineInMorse = lineInMorse.Replace("6","-.... ");
-            lineInMorse = lineInMorse.Replace("7","--... ");
-            lineInMorse = lineInMorse.Replace("8","---.. ");
-            lineInMorse = lineInMorse.Replace("9","----. ");
+            stringToConvert = stringToConvert.Replace(" ",     "| ");
+            stringToConvert = stringToConvert.Replace("?",    " ||");
+            stringToConvert = stringToConvert.Replace("!",    " ||");
+            stringToConvert = stringToConvert.Replace(".",    " ||");
+            stringToConvert = stringToConvert.Replace("a",    ".- ");
+            stringToConvert = stringToConvert.Replace("b",  "-... ");
+            stringToConvert = stringToConvert.Replace("c",  "-.-. ");
+            stringToConvert = stringToConvert.Replace("d",   "-.. ");
+            stringToConvert = stringToConvert.Replace("e",     ". ");
+            stringToConvert = stringToConvert.Replace("f",  "..-. ");
+            stringToConvert = stringToConvert.Replace("g",   "--. ");
+            stringToConvert = stringToConvert.Replace("h",  ".... ");
+            stringToConvert = stringToConvert.Replace("i",    ".. ");
+            stringToConvert = stringToConvert.Replace("j",  ".--- ");
+            stringToConvert = stringToConvert.Replace("k",   "-.- ");
+            stringToConvert = stringToConvert.Replace("l",  ".-.. ");
+            stringToConvert = stringToConvert.Replace("m",    "-- ");
+            stringToConvert = stringToConvert.Replace("n",    "-. ");
+            stringToConvert = stringToConvert.Replace("o",   "--- ");
+            stringToConvert = stringToConvert.Replace("p",  ".--. ");
+            stringToConvert = stringToConvert.Replace("q",  "--.- ");
+            stringToConvert = stringToConvert.Replace("r",   ".-. ");
+            stringToConvert = stringToConvert.Replace("s",   "... ");
+            stringToConvert = stringToConvert.Replace("t",     "- ");
+            stringToConvert = stringToConvert.Replace("u",   "..- ");
+            stringToConvert = stringToConvert.Replace("v",  "...- ");
+            stringToConvert = stringToConvert.Replace("w",   ".-- ");
+            stringToConvert = stringToConvert.Replace("x",  "-..- ");
+            stringToConvert = stringToConvert.Replace("y",  "-.-- ");
+            stringToConvert = stringToConvert.Replace("z",  "--.. ");
+            stringToConvert = stringToConvert.Replace("0", "----- ");
+            stringToConvert = stringToConvert.Replace("1", ".---- ");
+            stringToConvert = stringToConvert.Replace("2", "..--- ");
+            stringToConvert = stringToConvert.Replace("3", "...-- ");
+            stringToConvert = stringToConvert.Replace("4", "....- ");
+            stringToConvert = stringToConvert.Replace("5", "..... ");
+            stringToConvert = stringToConvert.Replace("6", "-.... ");
+            stringToConvert = stringToConvert.Replace("7", "--... ");
+            stringToConvert = stringToConvert.Replace("8", "---.. ");
+            stringToConvert = stringToConvert.Replace("9", "----. ");
         }
 
         /// <summary>
-        /// Will take each character in the input string and replace it with its Morse code equivalent. Spaces will be a pipe character, and punctuation will be a double pipe.
+        /// Will take each character in the input string and replace it with its Alphanumeric equivalent. A pipe will be a space, and a double pipe will be a period.
         /// </summary>
-        /// <param name="lineInEnglish">The string that will be replaced. The string will be overwritten in place with the new characters.</param>
-        private static void ConvertDotnotationToAlphanumeric(ref string lineInEnglish)
+        /// <param name="stringToConvert">The string that will be replaced. The string will be overwritten in place with the new characters.</param>
+        private static void ConvertDotnotationToAlphanumeric(ref string stringToConvert)
         {
             // Replace each letter with its English equivalent NOTE: The largest morse symbols must be at the top of the list or it will not work as expected.
-            lineInEnglish = lineInEnglish.Replace("-----","0");
-            lineInEnglish = lineInEnglish.Replace(".----","1");
-            lineInEnglish = lineInEnglish.Replace("..---","2");
-            lineInEnglish = lineInEnglish.Replace("...--","3");
-            lineInEnglish = lineInEnglish.Replace("....-","4");
-            lineInEnglish = lineInEnglish.Replace(".....","5");
-            lineInEnglish = lineInEnglish.Replace("-....","6");
-            lineInEnglish = lineInEnglish.Replace("--...","7");
-            lineInEnglish = lineInEnglish.Replace("---..","8");
-            lineInEnglish = lineInEnglish.Replace("----.","9");
-            lineInEnglish = lineInEnglish.Replace("-..." ,"b");
-            lineInEnglish = lineInEnglish.Replace("-.-." ,"c");
-            lineInEnglish = lineInEnglish.Replace("..-." ,"f");
-            lineInEnglish = lineInEnglish.Replace("...." ,"h");
-            lineInEnglish = lineInEnglish.Replace(".---" ,"j");
-            lineInEnglish = lineInEnglish.Replace(".-.." ,"l");
-            lineInEnglish = lineInEnglish.Replace(".--." ,"p");
-            lineInEnglish = lineInEnglish.Replace("--.-" ,"q");
-            lineInEnglish = lineInEnglish.Replace("...-" ,"v");
-            lineInEnglish = lineInEnglish.Replace("-..-" ,"x");
-            lineInEnglish = lineInEnglish.Replace("-.--" ,"y");
-            lineInEnglish = lineInEnglish.Replace("--.." ,"z");
-            lineInEnglish = lineInEnglish.Replace("-.."  ,"d");
-            lineInEnglish = lineInEnglish.Replace("--."  ,"g");
-            lineInEnglish = lineInEnglish.Replace("-.-"  ,"k");
-            lineInEnglish = lineInEnglish.Replace("---"  ,"o");
-            lineInEnglish = lineInEnglish.Replace(".-."  ,"r");
-            lineInEnglish = lineInEnglish.Replace("..."  ,"s");
-            lineInEnglish = lineInEnglish.Replace("..-"  ,"u");
-            lineInEnglish = lineInEnglish.Replace(".--"  ,"w");
-            lineInEnglish = lineInEnglish.Replace(".-"   ,"a");
-            lineInEnglish = lineInEnglish.Replace(".."   ,"i");
-            lineInEnglish = lineInEnglish.Replace("--"   ,"m");
-            lineInEnglish = lineInEnglish.Replace("-."   ,"n");
-            lineInEnglish = lineInEnglish.Replace("."    ,"e");
-            lineInEnglish = lineInEnglish.Replace("-"    ,"t");
-            lineInEnglish = lineInEnglish.Replace("||"  ,".");
-            lineInEnglish = lineInEnglish.Replace("|"    ," ");
+            stringToConvert = stringToConvert.Replace("-----" ,"0");
+            stringToConvert = stringToConvert.Replace(".----" ,"1");
+            stringToConvert = stringToConvert.Replace("..---" ,"2");
+            stringToConvert = stringToConvert.Replace("...--" ,"3");
+            stringToConvert = stringToConvert.Replace("....-" ,"4");
+            stringToConvert = stringToConvert.Replace("....." ,"5");
+            stringToConvert = stringToConvert.Replace("-...." ,"6");
+            stringToConvert = stringToConvert.Replace("--..." ,"7");
+            stringToConvert = stringToConvert.Replace("---.." ,"8");
+            stringToConvert = stringToConvert.Replace("----." ,"9");
+            stringToConvert = stringToConvert.Replace("-..."  ,"b");
+            stringToConvert = stringToConvert.Replace("-.-."  ,"c");
+            stringToConvert = stringToConvert.Replace("..-."  ,"f");
+            stringToConvert = stringToConvert.Replace("...."  ,"h");
+            stringToConvert = stringToConvert.Replace(".---"  ,"j");
+            stringToConvert = stringToConvert.Replace(".-.."  ,"l");
+            stringToConvert = stringToConvert.Replace(".--."  ,"p");
+            stringToConvert = stringToConvert.Replace("--.-"  ,"q");
+            stringToConvert = stringToConvert.Replace("...-"  ,"v");
+            stringToConvert = stringToConvert.Replace("-..-"  ,"x");
+            stringToConvert = stringToConvert.Replace("-.--"  ,"y");
+            stringToConvert = stringToConvert.Replace("--.."  ,"z");
+            stringToConvert = stringToConvert.Replace("-.."   ,"d");
+            stringToConvert = stringToConvert.Replace("--."   ,"g");
+            stringToConvert = stringToConvert.Replace("-.-"   ,"k");
+            stringToConvert = stringToConvert.Replace("---"   ,"o");
+            stringToConvert = stringToConvert.Replace(".-."   ,"r");
+            stringToConvert = stringToConvert.Replace("..."   ,"s");
+            stringToConvert = stringToConvert.Replace("..-"   ,"u");
+            stringToConvert = stringToConvert.Replace(".--"   ,"w");
+            stringToConvert = stringToConvert.Replace(".-"    ,"a");
+            stringToConvert = stringToConvert.Replace(".."    ,"i");
+            stringToConvert = stringToConvert.Replace("--"    ,"m");
+            stringToConvert = stringToConvert.Replace("-."    ,"n");
+            stringToConvert = stringToConvert.Replace("."     ,"e");
+            stringToConvert = stringToConvert.Replace("-"     ,"t");
+            stringToConvert = stringToConvert.Replace("||"    ,".");
+            stringToConvert = stringToConvert.Replace("|"     ," ");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace MCDoodle.API
 {
@@ -8,26 +9,31 @@ namespace MCDoodle.API
     {
         static void Main(string[] args)
         {
-            List<string> userInput = new List<string>();
+            string userInput = string.Empty;
             using(StreamReader reader = new StreamReader("../MCDoodleData/InputData.txt"))
             {
                 while(!reader.EndOfStream)
                 {
-                    userInput.Add(reader.ReadLine());
+                    userInput += (reader.ReadLine() + " ");
                 }
             }
 
-            Console.WriteLine($"To convert from English to Morse enter '1', to convert from Morse to English enter '2'");
-            string command = Console.ReadLine();
-            if(command == "1")
+            string output = string.Empty;
+            // will detect the input language and perform the appropriate translation
+            Regex rgx_containsAlphanumeric = new Regex("[A-Za-z0-9]");
+            if(rgx_containsAlphanumeric.IsMatch(userInput))
             {
-                string inputInMorse = MorseTranslator.TranslateEnglishToMorse(userInput);
-                Console.WriteLine(inputInMorse);
+                output = MorseTranslator.TranslateEnglishToMorse(userInput);
             }
-            else if(command == "2")
+            else
             {
-                string inputeInEnglish = MorseTranslator.TranslateMorseToEnglish(userInput);
-                Console.WriteLine(inputeInEnglish);
+                output = MorseTranslator.TranslateMorseToEnglish(userInput);
+            }
+
+            // write output to file (overwriting anything already there)
+            using(StreamWriter writer = new StreamWriter("../MCDoodleData/OutputData.txt",false))
+            {
+                writer.Write(output);
             }
         }
     }
